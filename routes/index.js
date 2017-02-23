@@ -41,4 +41,23 @@ router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
 
+function requireLogin(req, res, next) {
+  if (req.isAuthenticated()) {
+    next(); // allow the next route to run
+  } else {
+    // require the user to log in
+    res.redirect("/login"); // or render a form, etc.
+  }
+}
+
+// Automatically apply the `requireLogin` middleware to all
+// routes starting with `/user`
+// router.all("/user/*", requireLogin, function(req, res, next) {
+//   next();
+// });
+
+router.get("/user/create", requireLogin,function(req, res) {
+    res.send("test login");
+});
+
 module.exports = router;
