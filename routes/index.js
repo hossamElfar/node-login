@@ -50,14 +50,8 @@ function requireLogin(req, res, next) {
   }
 }
 
-// Automatically apply the `requireLogin` middleware to all
-// routes starting with `/user`
-// router.all("/user/*", requireLogin, function(req, res, next) {
-//   next();
-// });
-
 router.get("/user/create", requireLogin,function(req, res) {
-    res.send("test login");
+    res.send("protected route !!!!!");
 });
 
 module.exports = router;
